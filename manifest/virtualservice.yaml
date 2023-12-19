@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata: 
+  generation: 1
+  name: service2-vs
+  namespace: istio-ingress
+spec:
+  gateways:
+  - istio-ingress/service2-gw
+  hosts:
+  - service2.example.id 
+  http:
+  - route:
+    - destination:
+        host: service2
+        port:
+          number: 80

@@ -1,0 +1,35 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:  
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: service2-gw
+  namespace: istio-ingress 
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - service2.example.id
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+    tls:
+      httpsRedirect: true 
+  - hosts:
+    - service2.example.id
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      credentialName: service2-cert
+      maxProtocolVersion: TLSV1_3
+      minProtocolVersion: TLSV1_2
+      mode: SIMPLE

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  labels:
+    app.kubernetes.io/instance: service2
+    app.kubernetes.io/managed-by: Helm #(if use helm)
+    app.kubernetes.io/name: service2
+    app.kubernetes.io/version: 1.16.0
+    helm.sh/chart: go0-01  #(if use helm)
+    name: service2
+    role: http
+  name: service2
+  namespace: default 
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: service2
+    app.kubernetes.io/name: service2
+    name: service2
+    role: http
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
